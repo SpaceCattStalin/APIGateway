@@ -31,8 +31,6 @@ ScaffoldingReadMe.txt
 *.ldf
 
 # Docker
-**/Dockerfile
-**/docker-compose*
 **/*.container.*
 
 # Node-related (if any frontend tools used)
