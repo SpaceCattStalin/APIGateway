@@ -12,9 +12,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("http://localhost:5003/swagger/v1/swagger.json", "Knowledgebase API");
-        c.SwaggerEndpoint("http://localhost:5001/swagger/v1/swagger.json", "Chat API");
-        c.SwaggerEndpoint("http://localhost:5002/swagger/v1/swagger.json", "User API");
+        c.SwaggerEndpoint("https://localhost:7212/swagger/v1/swagger.json", "Knowledgebase API");
+        c.SwaggerEndpoint("https://localhost:7213/swagger/v1/swagger.json", "Chat API");
+        c.SwaggerEndpoint("https://localhost:7214/swagger/v1/swagger.json", "User API");
     });
 }
 

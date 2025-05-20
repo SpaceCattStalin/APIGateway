@@ -48,3 +48,6 @@ yarn-error.log*
 # Ignore all environment-specific config files
 **/appsettings.*.json
 !**/appsettings.json
+
+.env
+sqlserver_data/
