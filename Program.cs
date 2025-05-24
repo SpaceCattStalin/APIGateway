@@ -15,6 +15,10 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("https://localhost:7212/swagger/v1/swagger.json", "Knowledgebase API");
         c.SwaggerEndpoint("https://localhost:7213/swagger/v1/swagger.json", "Chat API");
         c.SwaggerEndpoint("https://localhost:7214/swagger/v1/swagger.json", "User API");
+        c.SwaggerEndpoint("https://localhost:7064/swagger/v1/swagger.json", "Application API");
+        c.SwaggerEndpoint("https://localhost:7150/swagger/v1/swagger.json", "College Info API");
+        c.SwaggerEndpoint("https://localhost:7209/swagger/v1/swagger.json", "Lead API");
+
     });
 }
 
