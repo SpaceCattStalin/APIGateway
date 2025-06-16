@@ -65,8 +65,7 @@ services:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=LeadDb;User=sa;Password=12345;
-    networks:
-      - benetwork
+
 
   college:
     image: spacestalinnn/collegeinfo-service:latest
