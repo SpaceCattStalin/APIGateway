@@ -23,19 +23,17 @@ services:
   user:
     image: spacestalinnn/user-service:latest
     build:
-      context: ../UserService
-      dockerfile: ../UserService/src/API/Dockerfile
+      context: ./
+      dockerfile: ./UserService/src/API/Dockerfile
     ports:
       - "5002:80"
     environment:
-      - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80  
       - Jwt__SecretKey=u8Qw1v9k2l5s8x/AeD3G6j9L2p4s7v0yB1e4h7k0n3r6u9z/C5F8J2M5Q8T1W4Z7
       - Jwt__Issuer=BE_UserService
       - Jwt__Audience=FE
       - Jwt__AccessTokenExpirationMinutes=60
       - Jwt__RefreshTokenExpirationDays=7
-      - ConnectionStrings__DefaultConnection=Server=tcp:bespacestalin.database.windows.net,1433;Initial Catalog=UserServiceDB;Persist Security Info=False;User ID=spacestalin;Password=4664lythihonG*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
       - Email__From=251qbao@gmail.com
       - Email__SmtpHost=smtp.gmail.com
       - Email__SmtpPort=465
@@ -46,22 +44,20 @@ services:
   lead:
     image: spacestalinnn/lead-service:latest
     build:
-      context: ../LeadManagementService
-      dockerfile: ../LeadManagementService/src/API/Dockerfile
+      context: ./
+      dockerfile: ./LeadManagementService/src/API/Dockerfile
     ports:
       - "5012:80"
     environment:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=tcp:bespacestalin.database.windows.net,1433;Initial Catalog=LeadService;Persist Security Info=False;User ID=spacestalin;Password=4664lythihonG*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 
   college:
     image: spacestalinnn/collegeinfo-service:latest
     build:
-      context: ../CollegeInfoService
-      dockerfile: ../CollegeInfoService/src/API/Dockerfile
+      context: ./
+      dockerfile: ./CollegeInfoService/src/API/Dockerfile
     ports:
       - "5010:80"
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=tcp:bespacestalin.database.windows.net,1433;Initial Catalog=CollegeInfoService;Persist Security Info=False;User ID=spacestalin;Password=4664lythihonG*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
