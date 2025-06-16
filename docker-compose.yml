@@ -1,15 +1,6 @@
 ﻿version: '3.8'
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong!Password
-    ports:
-      - "1433:1433"
-
   apigateway:
     image: spacestalinnn/apigateway:latest
     build:
@@ -41,7 +32,7 @@ services:
     environment:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80  
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserDb;User=sa;Password=12345;
+      - ConnectionStrings__DefaultConnection=Server=localhost;Database=UserServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
       - Jwt__SecretKey=u8Qw1v9k2l5s8x/AeD3G6j9L2p4s7v0yB1e4h7k0n3r6u9z/C5F8J2M5Q8T1W4Z7
       - Jwt__Issuer=BE_UserService
       - Jwt__Audience=FE
@@ -64,7 +55,7 @@ services:
     environment:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=LeadDb;User=sa;Password=12345;
+      - ConnectionStrings__DefaultConnection=Server=localhost;Database=LeadServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
 
 
   college:
@@ -76,5 +67,5 @@ services:
       - "5010:80"
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CollegeDb;User=sa;Password=12345;
+      - ConnectionStrings__DefaultConnection=Server=localhost;Database=CollegeInfoServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
 
