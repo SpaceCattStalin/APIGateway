@@ -12,7 +12,6 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0-noble AS build
 WORKDIR /src
 COPY ["APIGateway.csproj", "."]
-COPY ["appsettings.json", "appsettings.Production.json", "./"]
 
 RUN dotnet restore "./APIGateway.csproj"
 COPY . .
