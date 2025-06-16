@@ -9,8 +9,6 @@ services:
       - SA_PASSWORD=YourStrong!Password
     ports:
       - "1433:1433"
-    networks:
-      - benetwork
 
   apigateway:
     image: spacestalinnn/apigateway:latest
@@ -25,16 +23,13 @@ services:
       - user
       - lead
       - college
-    networks:
-      - benetwork
+
 
   rabbitmq-app:
     image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
-    networks:
-      - benetwork
 
   user:
     image: spacestalinnn/user-service:latest
@@ -58,8 +53,6 @@ services:
       - Email__Username=251qbao@gmail.com
       - Email__Password=bydi vpbd hyiz fjtq
       - Email__ConfirmationBaseUrl=http://localhost:5002
-    networks:
-      - benetwork
 
   lead:
     image: spacestalinnn/lead-service:latest
@@ -85,5 +78,4 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CollegeDb;User=sa;Password=12345;
-    networks:
-      - benetwork
+
