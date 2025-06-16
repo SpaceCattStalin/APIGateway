@@ -20,14 +20,16 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
   user:
     image: spacestalinnn/user-service:latest
     build:
-      context: ./
+      context: ./UserService
       dockerfile: ./UserService/src/API/Dockerfile
     ports:
       - "5002:80"
     environment:
+      - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80  
       - Jwt__SecretKey=u8Qw1v9k2l5s8x/AeD3G6j9L2p4s7v0yB1e4h7k0n3r6u9z/C5F8J2M5Q8T1W4Z7
       - Jwt__Issuer=BE_UserService
@@ -44,7 +46,7 @@ services:
   lead:
     image: spacestalinnn/lead-service:latest
     build:
-      context: ./
+      context: ./LeadManagementService
       dockerfile: ./LeadManagementService/src/API/Dockerfile
     ports:
       - "5012:80"
@@ -55,7 +57,7 @@ services:
   college:
     image: spacestalinnn/collegeinfo-service:latest
     build:
-      context: ./
+      context: ./CollegeInfoService
       dockerfile: ./CollegeInfoService/src/API/Dockerfile
     ports:
       - "5010:80"
