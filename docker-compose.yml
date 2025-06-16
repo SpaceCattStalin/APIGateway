@@ -25,7 +25,7 @@ services:
     image: spacestalinnn/user-service:latest
     build:
       context: ./UserService
-      dockerfile: ./UserService/src/API/Dockerfile
+      dockerfile: src/API/Dockerfile
     ports:
       - "5002:80"
     environment:
@@ -47,7 +47,7 @@ services:
     image: spacestalinnn/lead-service:latest
     build:
       context: ./LeadManagementService
-      dockerfile: ./LeadManagementService/src/API/Dockerfile
+      dockerfile: src/API/Dockerfile
     ports:
       - "5012:80"
     environment:
@@ -58,7 +58,7 @@ services:
     image: spacestalinnn/collegeinfo-service:latest
     build:
       context: ./CollegeInfoService
-      dockerfile: ./CollegeInfoService/src/API/Dockerfile
+      dockerfile: src/API/Dockerfile
     ports:
       - "5010:80"
     environment:
