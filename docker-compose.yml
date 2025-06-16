@@ -1,6 +1,17 @@
 ﻿version: '3.8'
 
 services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Password
+    ports:
+      - "1433:1433"
+    networks:
+      - benetwork
+
   apigateway:
     image: spacestalinnn/apigateway:latest
     build:
@@ -14,12 +25,16 @@ services:
       - user
       - lead
       - college
+    networks:
+      - benetwork
 
   rabbitmq-app:
     image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - benetwork
 
   user:
     image: spacestalinnn/user-service:latest
@@ -31,6 +46,7 @@ services:
     environment:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80  
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserDb;User=sa;Password=12345;
       - Jwt__SecretKey=u8Qw1v9k2l5s8x/AeD3G6j9L2p4s7v0yB1e4h7k0n3r6u9z/C5F8J2M5Q8T1W4Z7
       - Jwt__Issuer=BE_UserService
       - Jwt__Audience=FE
@@ -42,6 +58,8 @@ services:
       - Email__Username=251qbao@gmail.com
       - Email__Password=bydi vpbd hyiz fjtq
       - Email__ConfirmationBaseUrl=http://localhost:5002
+    networks:
+      - benetwork
 
   lead:
     image: spacestalinnn/lead-service:latest
@@ -53,6 +71,9 @@ services:
     environment:
       - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
       - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=LeadDb;User=sa;Password=12345;
+    networks:
+      - benetwork
 
   college:
     image: spacestalinnn/collegeinfo-service:latest
@@ -63,3 +84,6 @@ services:
       - "5010:80"
     environment:
       - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CollegeDb;User=sa;Password=12345;
+    networks:
+      - benetwork
