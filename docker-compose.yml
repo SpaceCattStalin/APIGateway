@@ -10,6 +10,7 @@ services:
       - "8080:80"
     environment:
       - ASPNETCORE_URLS=http://+:80    
+      - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       - user
       - lead
@@ -21,18 +22,20 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
   user:
     image: spacestalinnn/user-service:latest
     build:
-      context: ./UserService 
+      context: UserService 
       dockerfile: src/API/Dockerfile 
-    ports:
-      - "5002:80"
     environment:
-      - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
+      - RABBITMQ_HOST=rabbitmq-app
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
       - ASPNETCORE_URLS=http://+:80  
-      - ConnectionStrings__DefaultConnection=Server=localhost;Database=UserServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=UserServiceDB;User ID=sa_swd;Password=12345;TrustServerCertificate=True;MultipleActiveResultSets=true;
       - Jwt__SecretKey=u8Qw1v9k2l5s8x/AeD3G6j9L2p4s7v0yB1e4h7k0n3r6u9z/C5F8J2M5Q8T1W4Z7
       - Jwt__Issuer=BE_UserService
       - Jwt__Audience=FE
@@ -50,12 +53,12 @@ services:
     build:
       context: ./LeadManagementService
       dockerfile: src/API/Dockerfile
-    ports:
-      - "5012:80"
     environment:
-      - RABBITMQ_URI=amqp://user:4664lythihonG*@rabbitmq-app:5672/%2f
+      - RABBITMQ_HOST=rabbitmq-app
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=localhost;Database=LeadServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=LeadServiceDB;User ID=sa_swd;Password=12345;TrustServerCertificate=True;MultipleActiveResultSets=true;
 
 
   college:
@@ -63,9 +66,7 @@ services:
     build:
       context: ./CollegeInfoService
       dockerfile: src/API/Dockerfile
-    ports:
-      - "5010:80"
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=localhost;Database=CollegeInfoServiceDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=CollegeInfoServiceDB;User ID=sa_swd;Password=12345;TrustServerCertificate=True;MultipleActiveResultSets=true;
 
